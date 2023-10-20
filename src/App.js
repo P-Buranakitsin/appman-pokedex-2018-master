@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./App.css";
+import Modal from "./components/Modal";
 
 const COLORS = {
   Psychic: "#f8a5c2",
@@ -19,13 +20,28 @@ const COLORS = {
 };
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      show: false,
+    };
+    this.showModal = this.showModal.bind(this);
+    this.hideModal = this.hideModal.bind(this);
+  }
+
+  showModal = () => {
+    this.setState({ show: true });
+  };
+
+  hideModal = () => {
+    this.setState({ show: false });
+  };
+
   render() {
     return (
       <div className="App">
-        <h1 style={{height: "10%"}}>My Pokedex</h1>
-        <div className="Content" style={{height: "80%"}}>
-
-        </div>
+        <h1 style={{ height: "10%" }}>My Pokedex</h1>
+        <div className="Content" style={{ height: "80%" }}></div>
         <div
           style={{
             backgroundColor: COLORS.bottomBarBackground,
@@ -50,12 +66,16 @@ class App extends Component {
               justifyContent: "center",
               alignItems: "center",
               color: COLORS.bottomBarTextColor,
-              fontSize: 90
+              fontSize: 90,
             }}
+            onClick={this.showModal}
           >
             +
           </div>
         </div>
+        <Modal show={this.state.show} handleClose={this.hideModal}>
+          <div>Modal</div>
+        </Modal>
       </div>
     );
   }
