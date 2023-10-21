@@ -109,18 +109,17 @@ class App extends Component {
   };
 
   search = (value) => {
-    this.setState({ query: value }, () => {
-      const filteredAllCards = this.state.allCards.filter((card) => {
-        return !this.state.selectedCards.includes(card);
-      });
-      const filteredCards = filteredAllCards.filter((card) => {
-        return (
-          card.name.toLowerCase().includes(this.state.query.toLowerCase()) ||
-          card.type.toLowerCase().includes(this.state.query.toLowerCase())
-        );
-      });
-      this.setState({ cards: filteredCards });
+    this.setState({ query: value });
+    const filteredAllCards = this.state.allCards.filter((card) => {
+      return !this.state.selectedCards.includes(card);
     });
+    const filteredCards = filteredAllCards.filter((card) => {
+      return (
+        card.name.toLowerCase().includes(value.toLowerCase()) ||
+        card.type.toLowerCase().includes(value.toLowerCase())
+      );
+    });
+    this.setState({ cards: filteredCards });
   };
 
   add = (index) => {
@@ -139,7 +138,11 @@ class App extends Component {
     });
     this.setState({ selectedCards: filteredSelectedCards });
     const filteredAllCards = this.state.allCards.filter((card) => {
-      return !filteredSelectedCards.includes(card);
+      return (
+        !filteredSelectedCards.includes(card) &&
+        (card.name.toLowerCase().includes(this.state.query.toLowerCase()) ||
+          card.type.toLowerCase().includes(this.state.query.toLowerCase()))
+      );
     });
     this.setState({
       cards: filteredAllCards,
