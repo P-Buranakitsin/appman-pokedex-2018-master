@@ -3,7 +3,7 @@ import ProgressBar from "./ProgressBar";
 import { BiHappy } from "react-icons/bi";
 import "./Card.css";
 
-const Card = ({ cards, COLORS, mode }) => {
+const Card = ({ cards, COLORS, mode, handleAdd, handleDelete }) => {
   return (
     <>
       {cards.map((card, index) => {
@@ -44,6 +44,7 @@ const Card = ({ cards, COLORS, mode }) => {
                       color: COLORS.colorAddButton,
                     }}
                     className="add-button"
+                    onClick={() => handleAdd(index)}
                   >
                     Add
                   </h2>
@@ -54,6 +55,7 @@ const Card = ({ cards, COLORS, mode }) => {
                       color: COLORS.colorAddButton,
                     }}
                     className="delete-button"
+                    onClick={() => handleDelete(index)}
                   >
                     X
                   </h2>

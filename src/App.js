@@ -40,6 +40,8 @@ class App extends Component {
     this.showModal = this.showModal.bind(this);
     this.hideModal = this.hideModal.bind(this);
     this.search = this.search.bind(this);
+    this.add = this.add.bind(this);
+    this.delete = this.delete.bind(this);
   }
 
   componentDidMount() {
@@ -108,13 +110,39 @@ class App extends Component {
 
   search = (value) => {
     this.setState({ query: value }, () => {
-      const filteredCards = this.state.allCards.filter((card) => {
+      const filteredAllCards = this.state.allCards.filter((card) => {
+        return !this.state.selectedCards.includes(card);
+      });
+      const filteredCards = filteredAllCards.filter((card) => {
         return (
           card.name.toLowerCase().includes(this.state.query.toLowerCase()) ||
           card.type.toLowerCase().includes(this.state.query.toLowerCase())
         );
       });
       this.setState({ cards: filteredCards });
+    });
+  };
+
+  add = (index) => {
+    this.setState({
+      selectedCards: [...this.state.selectedCards, this.state.cards[index]],
+    });
+    const filteredCards = this.state.cards.filter((card, i) => {
+      return i !== index;
+    });
+    this.setState({ cards: filteredCards });
+  };
+
+  delete = (index) => {
+    const filteredSelectedCards = this.state.selectedCards.filter((card, i) => {
+      return i !== index;
+    });
+    this.setState({ selectedCards: filteredSelectedCards });
+    const filteredAllCards = this.state.allCards.filter((card) => {
+      return !filteredSelectedCards.includes(card);
+    });
+    this.setState({
+      cards: filteredAllCards,
     });
   };
 
@@ -128,6 +156,7 @@ class App extends Component {
             cards={this.state.selectedCards}
             COLORS={COLORS}
             mode={"DELETE"}
+            handleDelete={this.delete}
           />
         </div>
         <div
@@ -168,7 +197,12 @@ class App extends Component {
           cards={this.state.cards}
           handleSearch={this.search}
         >
-          <Card cards={this.state.cards} COLORS={COLORS} mode={"ADD"} />
+          <Card
+            cards={this.state.cards}
+            COLORS={COLORS}
+            mode={"ADD"}
+            handleAdd={this.add}
+          />
         </Modal>
       </div>
     );
