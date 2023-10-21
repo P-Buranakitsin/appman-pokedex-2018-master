@@ -1,0 +1,22 @@
+.card {
+  padding: 12px;
+  margin-bottom: 16px;
+  display: flex;
+  flex-direction: row;
+  box-shadow: 2px 3px #d5d6dc;
+}
+
+.card:hover {
+  box-shadow: 2px 3px #aeaeae;
+}
+
+.card:hover .add-button {
+  visibility: visible;
+}
+
+.add-button {
+  font-size: 38px;
+  font-weight: bold;
+  cursor: pointer;
+  visibility: hidden;
+}

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./App.css";
 import Modal from "./components/Modal";
+import Card from "./components/Card";
 
 const COLORS = {
   Psychic: "#f8a5c2",
@@ -17,16 +18,78 @@ const COLORS = {
   bottomBarBackground: "#ec5656",
   colorAddButton: "#dc7777",
   bottomBarTextColor: "#ffffff",
+  bottomBarBoxShadow: "#d9333387",
+  cardBackground: "#f3f4f7",
+  levelTubeBackground: "#e4e4e4",
+  levelTubeValueBackground: "#f3701a",
+  levelTubeBoxShadow: "#d4d4d4",
 };
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      error: null,
+      isLoaded: false,
+      cards: [],
       show: false,
     };
     this.showModal = this.showModal.bind(this);
     this.hideModal = this.hideModal.bind(this);
+  }
+
+  componentDidMount() {
+    fetch("http://localhost:3030/api/cards")
+      .then((res) => res.json())
+      .then(
+        (result) => {
+          const formattedCards = result.cards.map((card) => {
+            const hp = Number(card.hp)
+              ? Number(card.hp) > 100
+                ? 100
+                : Number(card.hp)
+              : 0;
+            const strength = card.attacks
+              ? card.attacks.length * 50 > 100
+                ? `100%`
+                : `${card.attacks.length * 50}%`
+              : `0%`;
+            const weakness = card.weaknesses
+              ? card.weaknesses.length * 100 > 100
+                ? `100%`
+                : `${card.weaknesses.length * 100}%`
+              : `0%`;
+            const damage = card.attacks
+              ? card.attacks.reduce((prev, next) => {
+                  return (
+                    Number(prev) +
+                    Number((next.damage || "").replace(/\D/g, ""))
+                  );
+                }, 0)
+              : 0;
+            const happiness = Math.round((hp / 10 + damage / 10 + 10) / 5);
+            return {
+              name: card.name,
+              imageUrl: card.imageUrl,
+              hp,
+              strength,
+              weakness,
+              damage,
+              happiness,
+            };
+          });
+          this.setState({
+            isLoaded: true,
+            cards: formattedCards,
+          });
+        },
+        (error) => {
+          this.setState({
+            isLoaded: true,
+            error,
+          });
+        }
+      );
   }
 
   showModal = () => {
@@ -38,6 +101,7 @@ class App extends Component {
   };
 
   render() {
+    console.log(this.state);
     return (
       <div className="App">
         <h1 style={{ height: "10%" }}>My Pokedex</h1>
@@ -48,11 +112,12 @@ class App extends Component {
             width: "100%",
             height: "10%",
             position: "relative",
+            boxShadow: COLORS.bottomBarBoxShadow,
           }}
         >
           <div
             style={{
-              backgroundColor: COLORS.colorAddButton,
+              backgroundColor: COLORS.bottomBarBackground,
               borderRadius: "50%",
               padding: 40,
               position: "absolute",
@@ -73,8 +138,12 @@ class App extends Component {
             +
           </div>
         </div>
-        <Modal show={this.state.show} handleClose={this.hideModal}>
-          <div>Modal</div>
+        <Modal
+          show={this.state.show}
+          handleClose={this.hideModal}
+          cards={this.state.cards}
+        >
+          <Card cards={this.state.cards} COLORS={COLORS} />
         </Modal>
       </div>
     );
