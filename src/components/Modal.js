@@ -1,8 +1,8 @@
-import React, { Component, useEffect, useState } from "react";
+import React from "react";
 import "./Modal.css";
 import { BiSearch } from "react-icons/bi";
 
-const Modal = ({ handleClose, show, children, cards }) => {
+const Modal = ({ handleClose, show, children, handleSearch }) => {
   const showHideClassName = show ? "modal display-block" : "modal display-none";
 
   return (
@@ -16,6 +16,7 @@ const Modal = ({ handleClose, show, children, cards }) => {
               id="search"
               name="searchPokemon"
               placeholder="Find pokemon"
+              onChange={(e) => {handleSearch(e.target.value)}}
             />
             <BiSearch
               style={{

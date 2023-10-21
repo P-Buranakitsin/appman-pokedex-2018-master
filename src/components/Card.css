@@ -14,7 +14,18 @@
   visibility: visible;
 }
 
+.card:hover .delete-button {
+    visibility: visible;
+  }
+
 .add-button {
+  font-size: 38px;
+  font-weight: bold;
+  cursor: pointer;
+  visibility: hidden;
+}
+
+.delete-button {
   font-size: 38px;
   font-weight: bold;
   cursor: pointer;

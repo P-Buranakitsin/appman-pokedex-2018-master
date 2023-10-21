@@ -3,7 +3,7 @@ import ProgressBar from "./ProgressBar";
 import { BiHappy } from "react-icons/bi";
 import "./Card.css";
 
-const Card = ({ cards, COLORS }) => {
+const Card = ({ cards, COLORS, mode }) => {
   return (
     <>
       {cards.map((card, index) => {
@@ -15,7 +15,11 @@ const Card = ({ cards, COLORS }) => {
             key={`card-${index}`}
             className="card"
           >
-            <img src={card.imageUrl} alt="cardImage" style={{ width: "25%" }} />
+            <img
+              src={card.imageUrl}
+              alt="cardImage"
+              style={{ width: "25%", objectFit: "contain" }}
+            />
             <div style={{ marginLeft: 24, width: "100%" }}>
               <div
                 style={{
@@ -34,14 +38,26 @@ const Card = ({ cards, COLORS }) => {
                 >
                   {card.name.toUpperCase()}
                 </h2>
-                <h2
-                  style={{
-                    color: COLORS.colorAddButton,
-                  }}
-                  className="add-button"
-                >
-                  Add
-                </h2>
+                {mode === "ADD" && (
+                  <h2
+                    style={{
+                      color: COLORS.colorAddButton,
+                    }}
+                    className="add-button"
+                  >
+                    Add
+                  </h2>
+                )}
+                {mode === "DELETE" && (
+                  <h2
+                    style={{
+                      color: COLORS.colorAddButton,
+                    }}
+                    className="delete-button"
+                  >
+                    X
+                  </h2>
+                )}
               </div>
 
               <ProgressBar value={`${card.hp}%`} COLORS={COLORS} label={"HP"} />
