@@ -1,6 +1,6 @@
 import React from "react";
-import "./Modal.css";
-import { BiSearch } from "react-icons/bi";
+import "./Modal.scss";
+import Search from "../search.png";
 
 const Modal = ({ handleClose, show, children, handleSearch }) => {
   const showHideClassName = show ? "modal display-block" : "modal display-none";
@@ -16,17 +16,21 @@ const Modal = ({ handleClose, show, children, handleSearch }) => {
               id="search"
               name="searchPokemon"
               placeholder="Find pokemon"
-              onChange={(e) => {handleSearch(e.target.value)}}
+              onChange={(e) => {
+                handleSearch(e.target.value);
+              }}
             />
-            <BiSearch
+            <img
               style={{
                 position: "absolute",
                 bottom: "50%",
                 right: 8,
+                width: 32,
+                height: 32,
                 transform: "translate(0%, 50%)",
               }}
-              size={32}
-              color="#ec5656"
+              src={Search}
+              alt="search"
             />
           </form>
         </div>

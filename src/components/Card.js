@@ -1,16 +1,17 @@
 import React from "react";
 import ProgressBar from "./ProgressBar";
-import { BiHappy } from "react-icons/bi";
-import "./Card.css";
+import "./Card.scss";
+import * as colors from "../colors.module.scss";
+import Cute from "../cute.png";
 
-const Card = ({ cards, COLORS, mode, handleAdd, handleDelete }) => {
+const Card = ({ cards, mode, handleAdd, handleDelete }) => {
   return (
     <>
       {cards.map((card, index) => {
         return (
           <div
             style={{
-              backgroundColor: COLORS.cardBackground,
+              backgroundColor: colors.cardBackground,
             }}
             key={`card-${index}`}
             className="card"
@@ -41,7 +42,7 @@ const Card = ({ cards, COLORS, mode, handleAdd, handleDelete }) => {
                 {mode === "ADD" && (
                   <h2
                     style={{
-                      color: COLORS.colorAddButton,
+                      color: colors.colorAddButton,
                     }}
                     className="add-button"
                     onClick={() => handleAdd(index)}
@@ -52,7 +53,7 @@ const Card = ({ cards, COLORS, mode, handleAdd, handleDelete }) => {
                 {mode === "DELETE" && (
                   <h2
                     style={{
-                      color: COLORS.colorAddButton,
+                      color: colors.colorAddButton,
                     }}
                     className="delete-button"
                     onClick={() => handleDelete(index)}
@@ -62,22 +63,20 @@ const Card = ({ cards, COLORS, mode, handleAdd, handleDelete }) => {
                 )}
               </div>
 
-              <ProgressBar value={`${card.hp}%`} COLORS={COLORS} label={"HP"} />
-              <ProgressBar
-                value={card.strength}
-                COLORS={COLORS}
-                label={"STR"}
-              />
-              <ProgressBar
-                value={card.weakness}
-                COLORS={COLORS}
-                label={"WEAK"}
-              />
+              <ProgressBar value={`${card.hp}%`} label={"HP"} />
+              <ProgressBar value={card.strength} label={"STR"} />
+              <ProgressBar value={card.weakness} label={"WEAK"} />
               {[...Array(card.happiness)].map((e, i) => (
-                <BiHappy
-                  size={40}
+                <img
+                  src={Cute}
                   key={`happy-${i}`}
-                  style={{ marginRight: 8, marginTop: 10 }}
+                  style={{
+                    marginRight: 8,
+                    marginTop: 10,
+                    width: 38,
+                    height: 38,
+                  }}
+                  alt="cute"
                 />
               ))}
             </div>

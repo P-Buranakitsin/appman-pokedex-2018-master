@@ -1,0 +1,31 @@
+$card-box-shadow: #d5d6dc;
+$card-box-shadow-hover: #aeaeae;
+$card-background: #f3f4f7;
+$color-add-button: #dc7777;
+$level-tube-background: #e4e4e4;
+$level-tube-box-shadow: #d4d4d4;
+$level-tube-value-background: #f3701a;
+$bottom-bar-background: #ec5656;
+$bottom-bar-box-shadow: #d9333387;
+$bottom-bar-text-color: #ffffff;
+$modal-outside: #000000a3;
+$modal-content-box-shadow: #474444;
+$modal-content-background: #ffffff;
+$search-box-border: #e6e6e6;
+
+:export {
+  cardBoxShadow: $card-box-shadow;
+  cardBoxShadowHover: $card-box-shadow-hover;
+  cardBackground: $card-background;
+  colorAddButton: $color-add-button;
+  levelTubeBackground: $level-tube-background;
+  levelTubeBoxShadow: $level-tube-box-shadow;
+  levelTubeValueBackground: $level-tube-value-background;
+  bottomBarBackground: $bottom-bar-background;
+  bottomBarBoxShadow: $bottom-bar-box-shadow;
+  bottomBarTextColor: $bottom-bar-text-color;
+  modalOutside: $modal-outside;
+  modalContentBoxShadow: $modal-content-box-shadow;
+  modalContentBackground: $modal-content-background;
+  searcBoxBorder: $search-box-border;
+}

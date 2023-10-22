@@ -1,0 +1,43 @@
+@import "./colors.module.scss";
+
+.app {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  position: relative;
+}
+
+.content {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: 14px;
+  width: 98%;
+  overflow: auto;
+}
+
+.open-modal-button {
+  border-radius: 50%;
+  padding: 40px;
+  position: absolute;
+  bottom: 0px;
+  left: 50%;
+  cursor: pointer;
+  transform: translate(-50%);
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 90px;
+  background-color: $bottom-bar-background;
+  color: $bottom-bar-text-color;
+}
+
+.bottom-bar {
+  background-color: $bottom-bar-background;
+  width: 100%;
+  height: 10%;
+  position: relative;
+  box-shadow: 2px $bottom-bar-box-shadow;
+}

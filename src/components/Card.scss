@@ -1,14 +1,16 @@
+@import "../colors.module.scss";
+
 .card {
   padding: 12px;
   margin-bottom: 16px;
   display: flex;
   flex-direction: row;
-  box-shadow: 2px 3px #d5d6dc;
+  box-shadow: 2px 3px $card-box-shadow;
   height: 340px
 }
 
 .card:hover {
-  box-shadow: 2px 3px #aeaeae;
+  box-shadow: 2px 3px $card-box-shadow-hover;
 }
 
 .card:hover .add-button {
