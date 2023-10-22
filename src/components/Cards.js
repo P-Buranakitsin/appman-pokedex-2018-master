@@ -1,10 +1,10 @@
 import React from "react";
 import ProgressBar from "./ProgressBar";
-import "./Card.scss";
+import "./Cards.scss";
 import * as colors from "../colors.module.scss";
 import Cute from "../cute.png";
 
-const Card = ({ cards, mode, handleAdd, handleDelete }) => {
+const Cards = ({ cards, mode, handleAdd, handleDelete }) => {
   return (
     <>
       {cards.map((card, index) => {
@@ -87,4 +87,4 @@ const Card = ({ cards, mode, handleAdd, handleDelete }) => {
   );
 };
 
-export default Card;
+export default Cards;

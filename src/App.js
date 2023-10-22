@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./App.scss";
 import Modal from "./components/Modal";
-import Card from "./components/Card";
+import Cards from "./components/Cards";
 
 class App extends Component {
   constructor(props) {
@@ -130,7 +130,7 @@ class App extends Component {
       <div className="app">
         <h1 style={{ height: "10%" }}>My Pokedex</h1>
         <div className="content" style={{ height: "80%" }}>
-          <Card
+          <Cards
             cards={this.state.selectedCards}
             mode={"DELETE"}
             handleDelete={this.delete}
@@ -147,7 +147,11 @@ class App extends Component {
           cards={this.state.cards}
           handleSearch={this.search}
         >
-          <Card cards={this.state.cards} mode={"ADD"} handleAdd={this.add} />
+          {this.state.cards.length > 0 ? (
+            <Cards cards={this.state.cards} mode={"ADD"} handleAdd={this.add} />
+          ) : (
+            <h3>No pokemon found</h3>
+          )}
         </Modal>
       </div>
     );
